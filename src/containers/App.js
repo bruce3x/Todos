@@ -5,7 +5,7 @@ import React from 'react';
 import {connect} from "react-redux";
 import AddTodo from '../components/AddTodo';
 import TodoList from '../components/TodoList';
-import Footer from '../components/Footer';
+import Header from '../components/Header';
 import {VisibilityFilters, toggleTodo, deleteTodo, addTodo, setVisibilityFilter} from "../actions";
 
 class App extends React.Component {
@@ -14,15 +14,15 @@ class App extends React.Component {
         return (
             <div style={{width: 400, margin: '100px auto'}}>
                 <h1 style={{textAlign: 'center'}}>Todo App</h1>
+                <Header
+                    filter={this.props.visibilityFilter}
+                    onFilterChange={filter => this.props.onFilterChange(filter)}/>
                 <AddTodo
                     onAddTodo={text => this.props.onAddTodo(text)}/>
                 <TodoList
                     onToggleTodo={index => this.props.onToggleTodo(index)}
                     onDeleteTodo={index => this.props.onDeleteTodo(index)}
                     todos={this.props.visibleTodos}/>
-                <Footer
-                    filter={this.props.visibilityFilter}
-                    onFilterChange={filter => this.props.onFilterChange(filter)}/>
             </div>
         );
     }
