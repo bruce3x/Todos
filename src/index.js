@@ -4,16 +4,21 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import {Provider} from 'react-redux';
-import {createStore} from 'redux';
+import {createStore, applyMiddleware} from 'redux';
+import  createLogger from 'redux-logger';
 import todoApp from './reducers';
 import App from './containers/App';
 import './App.css';
 
-let store = createStore(todoApp);
+const middlewares = [];
+
+middlewares.push(createLogger());
+
+let store = createStore(todoApp, applyMiddleware(...middlewares));
 
 ReactDOM.render(
     <Provider store={store}>
-        <App />
+        <App visibleTodos="" visibilityFilter=""/>
     </Provider>,
     document.getElementById('root')
 );
