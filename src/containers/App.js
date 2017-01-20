@@ -16,7 +16,10 @@ class App extends React.Component {
                 <h1 style={{textAlign: 'center'}}>Todo App</h1>
                 <Header
                     filter={this.props.visibilityFilter}
-                    onFilterChange={filter => this.props.onFilterChange(filter)}/>
+                    onFilterChange={filter => this.props.onFilterChange(filter)}
+                    completed={this.props.completed}
+                    total={this.props.total}
+                />
                 <AddTodo
                     onAddTodo={text => this.props.onAddTodo(text)}/>
                 <TodoList
@@ -39,7 +42,9 @@ App.propTypes = {
         VisibilityFilters.SHOW_ALL,
         VisibilityFilters.SHOW_COMPLETED,
         VisibilityFilters.SHOW_ACTIVE,
-    ]).isRequired
+    ]).isRequired,
+    completed: React.PropTypes.number.isRequired,
+    total: React.PropTypes.number.isRequired,
 };
 
 function selectTodos(todos, filter) {
@@ -56,7 +61,9 @@ function selectTodos(todos, filter) {
 
 const mapStateToProps = state => ({
     visibleTodos: selectTodos(state.todos, state.visibilityFilter),
-    visibilityFilter: state.visibilityFilter
+    visibilityFilter: state.visibilityFilter,
+    completed: state.todos.filter(todo => todo.completed).length,
+    total: state.todos.length
 });
 
 const mapDispatchToProps = dispatch => ({
