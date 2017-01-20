@@ -5,6 +5,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Card, Checkbox, Button} from 'antd';
 
+const cardStyle = {
+    marginTop: 8,
+    height: 60,
+};
+
+const cardBodyStyle = {
+    padding: 10
+};
+
 export default class Todo extends React.Component {
     onMouseOver = () => {
         ReactDOM.findDOMNode(this.refs.del).style.display = 'inline-block';
@@ -16,11 +25,8 @@ export default class Todo extends React.Component {
     render() {
         return (
             <Card
-                style={{
-                    marginTop: 8,
-                    height: 60,
-                }}
-                bodyStyle={{padding: 10}}
+                style={cardStyle}
+                bodyStyle={cardBodyStyle}
                 onMouseOver={this.onMouseOver}
                 onMouseOut={this.onMouseOut}>
                 <Checkbox
@@ -57,4 +63,18 @@ Todo.propTypes = {
     onDeleteTodo: React.PropTypes.func.isRequired,
     completed: React.PropTypes.bool.isRequired,
     text: React.PropTypes.string.isRequired,
+};
+
+export const EmptyTodo = () => {
+    return (
+        <Card
+            style={{
+                ...cardStyle,
+                fontSize: 16,
+                paddingTop: 7
+            }}
+            bodyStyle={cardBodyStyle}>
+            一个任务都没有！
+        </Card>
+    );
 };

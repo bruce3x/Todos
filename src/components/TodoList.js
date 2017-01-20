@@ -2,10 +2,19 @@
  * Created by bruce on 2017/1/20.
  */
 import React from 'react';
-import Todo from './Todo';
+import Todo, {EmptyTodo} from './Todo';
 
 export default class TodoList extends React.Component {
     render() {
+
+        if (!this.props.todos.length) {
+            return (
+                <div>
+                    <EmptyTodo/>
+                </div>
+            );
+        }
+
         return (
             <div>
                 {this.props.todos.map((todo, index) =>

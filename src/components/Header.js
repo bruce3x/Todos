@@ -3,11 +3,8 @@
  */
 import React from 'react'
 import {VisibilityFilters}from '../actions'
+import Filter from './Filter';
 import Counter from './Counter';
-import {Radio} from 'antd';
-
-const RadioGroup = Radio.Group;
-const RadioButton = Radio.Button;
 
 export default class Header extends React.Component {
 
@@ -15,14 +12,7 @@ export default class Header extends React.Component {
         return (
             <div
                 style={{marginTop: 16}}>
-                <RadioGroup
-                    size="small"
-                    defaultValue={VisibilityFilters.SHOW_ALL}
-                    onChange={(e) => this.props.onFilterChange(e.target.value)}>
-                    <RadioButton value={VisibilityFilters.SHOW_ALL}>全部</RadioButton>
-                    <RadioButton value={VisibilityFilters.SHOW_ACTIVE}>未完成</RadioButton>
-                    <RadioButton value={VisibilityFilters.SHOW_COMPLETED}>已完成</RadioButton>
-                </RadioGroup>
+                <Filter {...this.props}/>
                 <Counter {...this.props}/>
             </div>
         );
